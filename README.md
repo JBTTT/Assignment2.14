@@ -85,7 +85,7 @@ resource "aws_sns_topic_subscription" "email" {
   endpoint  = var.alert_email
 }
 
-# One alarm per DLQ for "messages visible > 0"
+#One alarm per DLQ for "messages visible > 0"
 resource "aws_cloudwatch_metric_alarm" "dlq_has_messages" {
   for_each            = toset(var.dlq_queue_names)
   alarm_name          = "DLQ-${each.key}-messages-visible"
@@ -107,7 +107,7 @@ resource "aws_cloudwatch_metric_alarm" "dlq_has_messages" {
   ok_actions    = [aws_sns_topic.dlq_alerts.arn]
 }
 
-# Optional: alert if the oldest message is getting stale (e.g., > 300s = 5 minutes)
+#Optional: alert if the oldest message is getting stale (e.g., > 300s = 5 minutes)
 resource "aws_cloudwatch_metric_alarm" "dlq_age_stale" {
   for_each            = toset(var.dlq_queue_names)
   alarm_name          = "DLQ-${each.key}-oldest-msg-age"
@@ -128,7 +128,6 @@ resource "aws_cloudwatch_metric_alarm" "dlq_age_stale" {
   alarm_actions = [aws_sns_topic.dlq_alerts.arn]
   ok_actions    = [aws_sns_topic.dlq_alerts.arn]
 }
-
 
 
 Notes
