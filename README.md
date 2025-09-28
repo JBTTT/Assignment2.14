@@ -130,6 +130,7 @@ resource "aws_cloudwatch_metric_alarm" "dlq_age_stale" {
 }
 
 
+
 Notes
 -	You need to confirm your email for the SNS subscription before you can get alerts.
 -	For DLQs in SNS subscriptions and EventBridge rules, keep directing the 
